@@ -115,4 +115,25 @@ class Shell implements IF_SHELL
 		//	In Shell, The status is 0 indicates success.
 		return $status === 0 ? true: false;
 	}
+
+	/**	Returns the error of the last executed command.
+	 *
+	 * Please be careful when executing commands consecutively.
+	 * Errors from the command executed two steps prior cannot be get.
+	 *
+	 * @created    2026-03-29
+	 * @see        \OP\IF_SHELL
+	 * @return     string
+	 */
+	static function Error() : string | null
+	{
+		//	Save
+		$error = self::$_error;
+
+		//	Reset
+		self::$_error = null;
+
+		//	Return
+		return $error;
+	}
 }
