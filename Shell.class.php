@@ -58,4 +58,37 @@ class Shell implements IF_SHELL
 	{
 		return self::Get( $command );
 	}
+
+	/**	Get the result of execution command.
+	 *
+	 * Returns the result of the command execution.
+	 *
+	 * @created    2026-03-29
+	 * @see        \OP\IF_SHELL
+	 * @param      string     $command
+	 * @return     string
+	 */
+	static function Get( string $command ) : string | false
+	{
+		//	Reset the error.
+		self::$_error = null;
+
+		/* @var $command string */
+		/* @var $output  array  */
+		/* @var $status  int    */
+		exec("{$command} 2>&1", $output, $status);
+
+		//	The $output of exec() an array.
+		$result = join("\n", $output);
+
+		//	The $status will be assigned to an error code.
+		if( $status ){
+			//	The result has been assigned an error.
+			self::$_error = $result;
+			$result = false;
+		}
+
+		//	Return the result.
+		return $result;
+	}
 }
