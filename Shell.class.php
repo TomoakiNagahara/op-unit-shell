@@ -91,4 +91,28 @@ class Shell implements IF_SHELL
 		//	Return the result.
 		return $result;
 	}
+
+	/**	Output of command.
+	 *
+	 * The result is output but not returned.
+	 * Internally, passthru() is executed.
+	 *
+	 * @created    2026-03-29
+	 * @see        \OP\IF_SHELL
+	 * @param      string     $command
+	 * @return     string
+	 */
+	static function Out( string $command ) : bool
+	{
+		//	If is　Admin, an error will be displayed on the screen.
+		if( OP()->isAdmin() ){
+			$command .= ' 2>&1';
+		}
+
+		/* @var $status int */
+		passthru( $command, $status );
+
+		//	In Shell, The status is 0 indicates success.
+		return $status === 0 ? true: false;
+	}
 }
