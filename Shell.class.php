@@ -34,4 +34,11 @@ class Shell implements IF_SHELL
 	 *
 	 */
 	use OP_CORE, OP_CI;
+
+	/**	Store the error of the last executed command.
+	 *
+	 * @created    2026-03-29
+	 * @var        string
+	 */
+	static $_error;
 }
