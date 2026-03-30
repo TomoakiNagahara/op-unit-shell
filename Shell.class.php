@@ -41,4 +41,21 @@ class Shell implements IF_SHELL
 	 * @var        string
 	 */
 	static $_error;
+
+	/**	Automatically
+	 *
+	 * <pre>
+	 * if(!$ls = OP()->Unit()->Shell('ls') ){
+	 *     $error = OP()->Unit()->Shell()->Error();
+	 * }
+	 * </pre>
+	 *
+	 * @created    2026-03-29
+	 * @param      string     $command
+	 * @return     string|false
+	 */
+	static function Auto( string $command ) : string | false
+	{
+		return self::Get( $command );
+	}
 }
